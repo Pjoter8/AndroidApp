@@ -3,6 +3,7 @@ package pl.przyklad.firebase_yt_29_08
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import pl.przyklad.firebase_yt_29_08.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,5 +22,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ChoiceTeacher::class.java)
             startActivity(intent)
         }
+    }
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+        finish()
     }
 }

@@ -43,6 +43,10 @@ class RegisterTeacher : AppCompatActivity() {
             }
         }
     }
+    override fun onBackPressed() {
+        val intent = Intent(this, LoginTeacher::class.java)
+        startActivity(intent)
+    }
     private fun readData(username: String, email: String, password: String){
         database = FirebaseDatabase.getInstance().getReference("Users")
         database.child(username).get().addOnSuccessListener {
@@ -51,8 +55,7 @@ class RegisterTeacher : AppCompatActivity() {
             }
             else{
                 val confirmpassword = password
-                val classlist = listOf("Empty")
-                val  user=User(username,email,password,confirmpassword, classlist)
+                val  user=User(username,email,password,confirmpassword)
                 database.child(username).setValue(user).addOnSuccessListener {
                     binding.username.text.clear()
                     binding.email.text.clear()

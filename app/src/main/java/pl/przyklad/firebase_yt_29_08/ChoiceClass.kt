@@ -26,27 +26,18 @@ class ChoiceClass : AppCompatActivity() {
             val className : String = binding.etclassname.text.toString()
             val teachername=intent.getStringExtra("key1")
 
-
-
-            //val className : String = binding.etclassname.text.toString()
-
-
             if  (className.isNotEmpty()){
                 if(teachername!=null) {
                     readData(className, teachername)
                 }
-
-
             }else{
-
                 Toast.makeText(this,"Please enter the Class",Toast.LENGTH_SHORT).show()
-
             }
-
-
-
         }
-
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, ChoiceTeacher::class.java)
+        startActivity(intent)
     }
 
     private fun readData(className: String, teachername: String) {
@@ -72,7 +63,6 @@ class ChoiceClass : AppCompatActivity() {
                     Toast.makeText(this, "Class Doesn't Exist", Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
     }
 }

@@ -18,24 +18,19 @@ class ChoiceTeacher : AppCompatActivity() {
 
         binding = ActivityChoiceTeacherBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.readdataBtn.setOnClickListener {
-
             val userName : String = binding.etusername.text.toString()
             if  (userName.isNotEmpty()){
-
                 readData(userName)
-
-
-
             }else{
-
                 Toast.makeText(this,"Please enter the Teacher",Toast.LENGTH_SHORT).show()
-
             }
-
         }
+    }
 
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun readData(userName: String) {
@@ -50,31 +45,15 @@ class ChoiceTeacher : AppCompatActivity() {
                 Toast.makeText(this,"Successfuly Read",Toast.LENGTH_SHORT).show()
 
                 binding.etusername.text.clear()
-                //binding.tvFirstName.text = firstname[0].toString()
-                //binding.tvLastName.text = lastName.toString()
-                //binding.tvAge.text = age.toString()
                 println(teachername)
                 val intent = Intent(this, ChoiceClass::class.java)
                 intent.putExtra("key1", teachername)
                 startActivity(intent)
-
-
-
             }else{
-
                 Toast.makeText(this,"Teacher Doesn't Exist",Toast.LENGTH_SHORT).show()
-
-
             }
-
         }.addOnFailureListener{
-
             Toast.makeText(this,"Failed",Toast.LENGTH_SHORT).show()
-
-
         }
-
-
-
     }
 }

@@ -118,6 +118,11 @@ class Quiz : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        val intent = Intent(this, ChoiceTeacher::class.java)
+        startActivity(intent)
+    }
     private fun readData(className: String, teachername: String, listener: OnWordListReceivedListener) {
 
         database = FirebaseDatabase.getInstance().getReference("Classes")

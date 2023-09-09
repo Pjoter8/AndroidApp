@@ -22,7 +22,7 @@
 
             <TextView
                 android:id="@+id/TVwordAng"
-                android:layout_width="144dp"
+                android:layout_width="168dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="8dp"
                 android:text=""
@@ -39,18 +39,12 @@
 
             <TextView
                 android:id="@+id/TVwordPol"
-                android:layout_width="149dp"
+                android:layout_width="163dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="8dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="20sp" />
-
-            <ImageButton
-                android:id="@+id/DeleteButton"
-                android:layout_width="29dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@android:drawable/ic_menu_delete" />
 
         </LinearLayout>
     </LinearLayout>

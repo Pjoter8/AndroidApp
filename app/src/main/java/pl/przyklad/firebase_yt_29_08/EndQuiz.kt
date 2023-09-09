@@ -32,4 +32,8 @@ class EndQuiz : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    override fun onBackPressed() {
+        val intent = Intent(this, ChoiceTeacher::class.java)
+        startActivity(intent)
+    }
 }

@@ -28,18 +28,27 @@ class AddWords : AppCompatActivity() {
             val EnglishWord = binding.EnglishWordAddET.text.toString()
 
             val classname = intent.getStringExtra("key32")
+            val username = intent.getStringExtra("key29")
 
-            if (PolishWord.isNotEmpty() && EnglishWord.isNotEmpty() && classname != null) {
+            if (PolishWord.isNotEmpty() && EnglishWord.isNotEmpty() && classname != null&& username!=null) {
                 binding.EnglishWordAddET.text
-                readData(classname, PolishWord, EnglishWord)
+                readData(classname, PolishWord, EnglishWord,username)
 
             } else {
                 Toast.makeText(this@AddWords, "Uncomplete data", Toast.LENGTH_SHORT).show()
             }
         }
     }
+    override fun onBackPressed() {
+        val classname = intent.getStringExtra("key32")
+        val username = intent.getStringExtra("key29")
+        val intent = Intent(this, WordsList::class.java)
+        intent.putExtra("key30", classname)
+        intent.putExtra("key29", username)
+        startActivity(intent)
+    }
 
-    private fun readData(classname: String, PolishWord: String, EnglishWord: String){
+    private fun readData(classname: String, PolishWord: String, EnglishWord: String,username:String){
 
         val database = FirebaseDatabase.getInstance()
         val reference = database.getReference("Classes/" + classname + "/words")
@@ -59,6 +68,7 @@ class AddWords : AppCompatActivity() {
                         binding.EnglishWordAddET.text.clear()
                         val intent = Intent(this@AddWords, WordsList::class.java)
                         intent.putExtra("key30", classname)
+                        intent.putExtra("key29", username)
                         startActivity(intent)
                     }
                     .addOnFailureListener {

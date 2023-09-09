@@ -25,7 +25,7 @@ class LoggedTeacher : AppCompatActivity() {
         binding= ActivityLoggedTeacherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val userName = intent.getStringExtra("key29")
+        val userName = intent.getStringExtra("key28")
         binding.AddClassBtn.setOnClickListener {
 
             val className = binding.className.text.toString()
@@ -38,6 +38,14 @@ class LoggedTeacher : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        val userName = intent.getStringExtra("key28")
+        val intent = Intent(this, Teacherlistclass::class.java)
+        intent.putExtra("key28", userName)
+        startActivity(intent)
+    }
+
     private fun readData(className: String, userName: String){
         database = FirebaseDatabase.getInstance().getReference("Classes")
         database.child(className).get().addOnSuccessListener {
@@ -46,7 +54,7 @@ class LoggedTeacher : AppCompatActivity() {
             }
             else{
                 val ListOfWords = listOf(
-                    mapOf("key1" to "value1"),
+                    mapOf("test" to "test"),
                 )
                 val newclass = Class(ListOfWords)
                 database.child(className).setValue(newclass).addOnSuccessListener {
@@ -62,28 +70,27 @@ class LoggedTeacher : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         val reference = database.getReference("Users/$userName/className")
 
-        // Odczytaj liczbę elementów w liście
+
         reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val newIndex = dataSnapshot.childrenCount // Użyj liczby elementów jako nowego indeksu
+                val newIndex = dataSnapshot.childrenCount
 
                 val newElementReference = reference.child(newIndex.toString())
                 newElementReference.setValue(className)
                     .addOnSuccessListener {
-                        // Tutaj możesz obsłużyć sukces
-                        Toast.makeText(this@LoggedTeacher, "Element added successfully", Toast.LENGTH_SHORT).show()
+
                         val intent = Intent(this@LoggedTeacher, Teacherlistclass::class.java)
                         intent.putExtra("key28", userName)
                         startActivity(intent)
                     }
                     .addOnFailureListener {
-                        // Tutaj możesz obsłużyć błąd
+
                         Toast.makeText(this@LoggedTeacher, "Error adding element: ${it.message}", Toast.LENGTH_SHORT).show()
                     }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Obsłuż błąd odczytu liczby elementów
+
                 Toast.makeText(this@LoggedTeacher, "Error reading list: ${databaseError.message}", Toast.LENGTH_SHORT).show()
             }
         })

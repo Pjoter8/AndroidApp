@@ -37,6 +37,10 @@ class LoginTeacher : AppCompatActivity() {
 
         }
     }
+    override fun onBackPressed() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
     private fun readDataTeacher (username: String, password: String){
         database = FirebaseDatabase.getInstance().getReference("Users")
         database.child(username).get().addOnSuccessListener {

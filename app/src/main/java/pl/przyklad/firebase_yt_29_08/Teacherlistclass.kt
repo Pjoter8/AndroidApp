@@ -27,6 +27,7 @@ class Teacherlistclass : AppCompatActivity() {
             val username = intent.getStringExtra("key28")
 
             if (username != null) {
+                delay(400)
                 val listaStringow = getFirebaseData(username)
                 val adapter = MyAdapter(listaStringow)
 
@@ -51,10 +52,14 @@ class Teacherlistclass : AppCompatActivity() {
         binding.addClassroundBtn.setOnClickListener {
             val username = intent.getStringExtra("key28")
             val intent = Intent(this, LoggedTeacher::class.java)
-            intent.putExtra("key29", username)
+            intent.putExtra("key28", username)
             startActivity(intent)
         }
 
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, LoginTeacher::class.java)
+        startActivity(intent)
     }
 
     private suspend fun getFirebaseData(username:String): List<String> {
